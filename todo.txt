@@ -1,8 +1,2 @@
-opcode implementations:
-    0x00E0
-    0x000E
-    0xFX0A
-    0xFX29
-    0xFX33
-    
-fill out charset table
+fill out key table in main.cpp
+set up GLUT (opengl)
