@@ -2,7 +2,6 @@
 
 #include <iostream>
 #include <cstdlib>
-#include <conio.h>
 
 using namespace std;
 
@@ -13,7 +12,7 @@ void Chip8::updateTimers(){
 
     if(sound_timer > 0){
         if(sound_timer == 1)
-            cout << "BEEP! << endl;
+            cout << "BEEP!" << endl;
         sound_timer--;
     }
 }
@@ -62,7 +61,7 @@ void Chip8::emulateCycle(){
                             gfx[i][j] = 0x0; //turns bit off
                         }
                     } 
-                    draw_flag = trye;
+                    draw_flag = true;
                     pc += 2;
                 break;
 
@@ -211,7 +210,7 @@ void Chip8::emulateCycle(){
                      //       VF is set to 1 if any pixels are flipped from set to unset and 0 if that doesn't happen
             unsigned short x = V[(opcode & 0x0F00) >> 8];
             unsigned short y = V[(opcode & 0x00F0) >> 4];
-            unsigned short height = opcide & 0x000F;
+            unsigned short height = opcode & 0x000F;
             unsigned short pixel;
 
             V[0xF] = 0;
@@ -222,7 +221,7 @@ void Chip8::emulateCycle(){
                         if(gfx[(x + xLine + ((y + yLine) * 64))] == 1){
                             v[0xF] = 1;
                         }
-                        gfx[x _ xLine + ((y + yLine) * 64)] ^= 1;
+                        gfx[x + xLine + ((y + yLine) * 64)] ^= 1;
                     }
                 }
             }

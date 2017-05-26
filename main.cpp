@@ -1,20 +1,21 @@
 #include "Chip8.h"
 #include <GL/freeglut.h>
 #include <cstdlib>
-#include <time>
+#include <ctime>
+#include <stdio.h>
 
 #define SCREEN_WIDTH 64
 #define SCREEN_HEIGHT 32
 
-Chip8 chip8_emu;
+Chip8 myChip8;
 
 //Window sizing
-int window_size_modifier = 10;
-int display_width = SCREEN_WIDTH * window_size_modifier;
-int display_height = SCREEN_HEIGHT * window_size_modifier;
+int modifier = 10;
+int display_width = SCREEN_WIDTH * modifier;
+int display_height = SCREEN_HEIGHT * modifier;
 
-int displau();
-void reshape_window(GLsizei w, GLSizei h);
+void display();
+void reshape_window(GLsizei w, GLsizei h);
 void keyboardDown(unsigned char key, int x, int y);
 void keyboardUp(unsigned char key, int x, int y);
 
@@ -48,7 +49,7 @@ int main(int argc, char **argv){
 
     glutDisplayFunc(display);
     glutIdleFunc(display);
-    glutReshaprFunc(reshape_window);
+    glutReshapeFunc(reshape_window);
     glutKeyboardFunc(keyboardDown);
     glutKeyboardUpFunc(keyboardUp);
 
@@ -56,16 +57,18 @@ int main(int argc, char **argv){
     setupTexture();
 #endif
 
-    mainLoop();
+    glutMainLoop();
 
     return 0;
 }
 
 void setupTexture(){
     //Clear screen
-    for(int y = 0; u < SCREEN_HEIGHT)
-        for(int x = 0; x < SCREEN_WIDTH)
-            screenData[y][x][0] = screenData[u][x][1] = screenData[u][x][2] = 0;
+    for(int y = 0; y < SCREEN_HEIGHT; ++y){
+        for(int x = 0; x < SCREEN_WIDTH; ++x){
+            screenData[y][x][0] = screenData[y][x][1] = screenData[y][x][2] = 0;
+        }
+    }
 
     //Create a texture
     glTexImage2D(GL_TEXTURE_2D, 0, 3, SCREEN_WIDTH, SCREEN_HEIGHT, 0, GL_RGB, GL_UNSIGNED_BYTE, (GLvoid*)screenData);
@@ -80,17 +83,17 @@ void setupTexture(){
     glEnable(GL_TEXTURE_2D);
 }
 
-void updateTexture(const chip8& c8){
+void updateTexture(const Chip8& c8){
     //Update pixels
-    for(int u = 0; y < 32; ++y)
+    for(int y = 0; y < 32; ++y)
         for(int x = 0; x < 64; ++x)
             if(c8.gfx[(y*64) + x] == 0)
-                screenData[u][x][0] = screenData[u][x][1] = screenData[y][x][2] = 0; //Disabled
+                screenData[y][x][0] = screenData[y][x][1] = screenData[y][x][2] = 0; //Disabled
             else
-                screenData[u][x][0] = screenData[u][x][1] = screenData[y][x][2] = 255; //Enabled
+                screenData[y][x][0] = screenData[y][x][1] = screenData[y][x][2] = 255; //Enabled
 
     //Update Texture
-    glTexSubImage2D(GL_TEXTURE_2D, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, GL_RGB, GL_UNSIGNED_BYTE, (GLvoid*)screenData); 
+    glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, GL_RGB, GL_UNSIGNED_BYTE, (GLvoid*)screenData); 
 
     glBegin( GL_QUADS );
         glTexCoord2d(0.0, 0.0);     glVertex2d(0.0,           0.0);
@@ -101,7 +104,16 @@ void updateTexture(const chip8& c8){
         
 }
 
-void updateQuads(const chip8& c8){
+void drawPixel(int x, int y){
+    glBegin(GL_QUADS);
+        glVertex3f((x * modifier) + 0.0f,       (y * modifier) + 0.0f,      0.0f);
+        glVertex3f((x * modifier) + 0.0f,       (y * modifier) + modifier,  0.0f);
+        glVertex3f((x * modifier) + modifier,   (y * modifier) + modifier,  0.0f);
+        glVertex3f((x * modifier) + modifier,   (y * modifier) + 0.0f,      0.0f);
+    glEnd();
+}
+
+void updateQuads(const Chip8& c8){
     //Draw
     for(int y = 0; y < 32; ++y)
        for(int x = 0; x < 64; ++x){
@@ -196,4 +208,5 @@ void keyboardUp(unsigned char key, int x, int y){
         case 'x':   myChip8.key[0x0] = 0;   break;
         case 'c':   myChip8.key[0xB] = 0;   break;
         case 'v':   myChip8.key[0xF] = 0;   break;
+    }
 }
