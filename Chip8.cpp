@@ -20,21 +20,16 @@ void Chip8::updateTimers(){
 Chip8::Chip8(){
     /* set all registers to zero, clear all memory */
 
-    opcode = 0; //Reset current opcode
-    I = 0; //Reset index register
-    sp = 0; //Reset stack pointer
-    pc = 0x200; //Program counter starts at 0x200
+    this->opcode = 0; //Reset current opcode
+    this->I = 0; //Reset index register
+    this->sp = 0; //Reset stack pointer
+    this->pc = 0x200; //Program counter starts at 0x200
 
     //Clear display
     //Clear stack
     //Clear registers V0-VF
     //Clear memory
     
-    //Load fontset
-    for(int i = 0; i < 80; ++i){
-        //memory[i] = chip8_fontset[i]; //TODO: implement chip8_fontset[]
-    }
-
     //Reset timers
     
 }
@@ -50,16 +45,15 @@ void Chip8::loadGame(){
 void Chip8::emulateCycle(){
     //Fetch opcode
     opcode = memory[pc] << 8 | memory[pc+1]; //merge 2bytes in memory to 4byte opcode
-    //Decode opcode TODO: implement opcodes
+
+    //Decode opcode
     switch(opcode & 0xF000){ //Get first letter
 
         case 0x0000:
             switch(opcode & 0x000F){
                 case 0x0000: //0x00E0: Clears screen
-                    for(int i = 0; i < 64; i++){
-                        for(int j = 0; j < 32; j++){
-                            gfx[i][j] = 0x0; //turns bit off
-                        }
+                    for(int i = 0; i < 64 * 32; i++){
+                        gfx[i] = 0x0; //turns bit off
                     } 
                     draw_flag = true;
                     pc += 2;
@@ -204,7 +198,7 @@ void Chip8::emulateCycle(){
             pc += 2;
         break;
 
-        case 0xD000: // DXYN: Draws a sprite at (Vx, Vy) with a width of 8 and height of N. 
+        case 0xD000:{ // DXYN: Draws a sprite at (Vx, Vy) with a width of 8 and height of N. 
                      //       Each row of 8 pixels is read as bit-coded starting from memory location I. 
                      //       I does not change after this instruction. 
                      //       VF is set to 1 if any pixels are flipped from set to unset and 0 if that doesn't happen
@@ -217,9 +211,9 @@ void Chip8::emulateCycle(){
             for(int yLine = 0; yLine < height; yLine++){
                 pixel = memory[I + yLine];
                 for(int xLine = 0; xLine < 8; xLine++){
-                    if((pixel & (0x80 >> XLine)) != 0){
+                    if((pixel & (0x80 >> xLine)) != 0){
                         if(gfx[(x + xLine + ((y + yLine) * 64))] == 1){
-                            v[0xF] = 1;
+                            V[0xF] = 1;
                         }
                         gfx[x + xLine + ((y + yLine) * 64)] ^= 1;
                     }
@@ -228,6 +222,7 @@ void Chip8::emulateCycle(){
 
             draw_flag = true;
             pc += 2;
+        }
         break;
 
         case 0xE000:
@@ -255,10 +250,19 @@ void Chip8::emulateCycle(){
                     pc += 2;
                 break;
 
-                case 0x000A: //FX0A: Halts until a key is pressed, then key is stored in Vx
-                    unsigned char key_press = getch();
-                    V[(opcode & 0x0F00) >> 8] = key_press;
+                case 0x000A:{ //FX0A: Halts until a key is pressed, then key is stored in Vx
+                    bool key_press = false;
+
+                    for(int i = 0; i < 16; i++){
+                        if(key[i] != 0){
+                            V[(opcode & 0x0F00) >> 8] = key_press;
+                            key_press = true;
+                        }
+                    }
+
+                    if(!key_press) return;
                     pc += 2;
+                }
                 break;
 
                 case 0x0015: //FX15: Sets delay timer to Vx
@@ -276,32 +280,33 @@ void Chip8::emulateCycle(){
                     pc += 2;
                 break;
 
-                case 0x0029 //FX29: Sets I to the locaton of the sprite for the character in Vx (Characters 0-F are represented by a 4x5 font
+                case 0x0029: //FX29: Sets I to the locaton of the sprite for the character in Vx (Characters 0-F are represented by a 4x5 font
                     I = V[(opcode & 0x0F00) >> 8] * 0x5;
                     pc += 2;
                 break;
 
-                case 0x0033 //FX33: Stores the binary decimal representation of Vx
-                            //      Most significant digits stored at address in I
-                            //      Middle digit at I + 1
-                            //      Least significant digit at I + 2
-                            //      (Basically, hundreds at I, tens at I+1, ones at I+2)
+                case 0x0033: //FX33: Stores the binary decimal representation of Vx
+                             //      Most significant digits stored at address in I
+                             //      Middle digit at I + 1
+                             //      Least significant digit at I + 2
+                             //      (Basically, hundreds at I, tens at I+1, ones at I+2)
                     memory[I] = V[(opcode & 0x0F00) >> 8] / 100;
                     memory[I+1] = (V[(opcode & 0x0F00) >> 8] / 10) % 10;
                     memory[I+2] = (V[(opcode & 0x0F00) >> 8] % 100) % 10;
                     pc += 2;
                 break;
 
-                case 0x0055 //FX55: Stores V0 to Vx (including V0) in memory starting at address I
+                case 0x0055:{ //FX55: Stores V0 to Vx (including V0) in memory starting at address I
                     int index = (opcode & 0x0F00) >> 8;
                     for(int i = 0; i < index; i++){
                         memory[I] = V[i];
                         I++;
                     }
                     pc += 2;
+                }
                 break;
 
-                case 0x0065 //FX65: Fills V0 to Vx with values starting at address I
+                case 0x0065: //FX65: Fills V0 to Vx with values starting at address I
                     int index = (opcode & 0x0F00) >> 8;
                     for(int i = 0; i < index; i++){
                         V[i] = memory[I];
@@ -312,12 +317,9 @@ void Chip8::emulateCycle(){
             }
         break;
 
-        case default:
+        default:
             cout << "Unknown opcode: 0x" << opcode << endl;
     }
     
     updateTimers();
-}
-
-void Chip8::setKeys(){
 }

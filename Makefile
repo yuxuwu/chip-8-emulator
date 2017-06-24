@@ -13,8 +13,8 @@ all: $(OBJECTS)
 run: all
 	./$(PNAME)
 
-chip8.o: Chip8.cpp Chip8.h
-	g++ chip8.cpp $(CFLAGSOBJECT) chip8.o
+Chip8.o: Chip8.cpp Chip8.h
+	g++ Chip8.cpp $(CFLAGSOBJECT) Chip8.o
 
 main.o: main.cpp
 	g++ main.cpp $(CFLAGSOBJECT) main.o
