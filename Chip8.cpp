@@ -21,6 +21,8 @@ Chip8::Chip8(){
 }
 
 void Chip8::init(){
+
+    cerr << "Initializing emulator" << endl;
     pc = 0x200;
     opcode = 0;
     I = 0;
@@ -345,7 +347,7 @@ void Chip8::emulateCycle(){
 
 bool Chip8::loadApplication(char const* filename){
     init();
-    cout << "Loading " << filename << endl;
+    cerr << "Loading " << filename << endl;
 
     //Open file
     FILE *pFile = fopen(filename, "rb");
@@ -387,5 +389,6 @@ bool Chip8::loadApplication(char const* filename){
     fclose(pFile);
     free(buffer);
 
+    cerr << "ROM loaded" << endl;
     return true;
 }

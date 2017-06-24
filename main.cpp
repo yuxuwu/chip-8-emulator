@@ -13,6 +13,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <stdio.h>
+#include <iostream>
 #include <GL/freeglut.h>
 #include "Chip8.h"
 
@@ -53,20 +54,24 @@ int main(int argc, char **argv)
 	// Setup OpenGL
 	glutInit(&argc, argv);          
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
+    std::cerr << "Initialized glut display" << std::endl;
 
 	glutInitWindowSize(display_width, display_height);
     glutInitWindowPosition(320, 320);
 	glutCreateWindow("myChip8 by Laurence Muller");
+    std::cerr << "Created glut window" << std::endl;
 	
 	glutDisplayFunc(display);
 	glutIdleFunc(display);
     glutReshapeFunc(reshape_window);        
 	glutKeyboardFunc(keyboardDown);
 	glutKeyboardUpFunc(keyboardUp); 
+    std::cerr << "Finished setting up glut functions" << std::endl;
 
 #ifdef DRAWWITHTEXTURE
 	setupTexture();			
 #endif	
+    std::cerr << "Finished setting up textures" << std::endl;
 
 	glutMainLoop(); 
 
@@ -143,6 +148,7 @@ void updateQuads(const Chip8& c8)
 
 void display()
 {
+    std::cerr << "In display function" << std::endl;
 	myChip8.emulateCycle();
 		
 	if(myChip8.drawFlag)
