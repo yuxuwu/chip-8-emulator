@@ -48,7 +48,8 @@ class Chip8{
         unsigned char key[16]; //hex based (0x0 - 0xF) keypad for input
 
         Chip8();
-        bool loadApplication(const char * filename);
+        void init();
+        bool loadApplication(char const* filename);
         void emulateCycle();
         void setKeys();
 };
