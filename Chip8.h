@@ -1,6 +1,8 @@
 #ifndef CHIP8_H
 #define CHIP8_H
 
+#include <SFML/Graphics.hpp>
+
 class Chip8{
     private:
         unsigned short opcode; //opcodes are 2 bytes long; unsigned short == 2 bytes
@@ -23,15 +25,18 @@ class Chip8{
         void updateTimers();
         void init();
 
-    public:
         bool drawFlag;
         unsigned char gfx[64*32];
-        unsigned char key[16]; //hex based (0x0 - 0xF) keypad for input
 
+
+    public:
+        unsigned char key[16]; //hex based (0x0 - 0xF) keypad for input
         Chip8();
         ~Chip8();
         bool loadApplication(char const* filename);
         void emulateCycle();
         void setKeys();
+        sf::Uint8* getGFX();
+        bool isDraw();
 };
 #endif
