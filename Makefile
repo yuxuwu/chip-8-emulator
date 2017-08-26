@@ -1,18 +1,18 @@
 #Makefile variables
- 
+COMPILER =c++
 #Project name
-PNAME = Chip8-Emu
+PNAME =Chip8-Emu
 #Compiler flags
-CFLAGS = -std=c++14
-CFLAGSOBJECT = -g -c
-SFMLPROJECTFLAGS = -o $(PNAME) -lsfml-graphics -lsfml-window -lsfml-system
+CFLAGS =-std=c++14
+CFLAGSOBJECT =-g -c
+SFMLPROJECTFLAGS =-o $(PNAME) -lsfml-graphics -lsfml-window -lsfml-system
 #Sources
-MAIN = main.cpp
-SOURCES = Chip8.cpp
-OBJECTS = $(MAIN:.cpp=.o) $(SOURCES:.cpp=.o) 
+MAIN =main.cpp
+SOURCES =Chip8.cpp
+OBJECTS =$(MAIN:.cpp=.o) $(SOURCES:.cpp=.o) 
 
 all: $(OBJECTS)
-	g++ $(OBJECTS) $(SFMLPROJECTFLAGS)
+	$(COMPILER) $(OBJECTS) $(SFMLPROJECTFLAGS)
 
 run: all
 	./$(PNAME)
@@ -24,10 +24,10 @@ checkmem: all
 	valgrind ./$(PNAME)
 
 Chip8.o: Chip8.cpp Chip8.h
-	g++ $(CFLAGSOBJECT) Chip8.cpp
+	$(COMPILER) $(CFLAGSOBJECT) Chip8.cpp
 
 main.o: main.cpp
-	g++ $(CFLAGSOBJECT) main.cpp
+	$(COMPILER) $(CFLAGSOBJECT) main.cpp
 
 clean:
 	rm $(OBJECTS) $(PNAME)

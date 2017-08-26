@@ -28,7 +28,6 @@ class Chip8{
         bool drawFlag;
         unsigned char gfx[64*32];
 
-
     public:
         unsigned char key[16]; //hex based (0x0 - 0xF) keypad for input
         Chip8();
