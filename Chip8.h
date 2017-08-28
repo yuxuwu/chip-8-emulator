@@ -2,6 +2,11 @@
 #define CHIP8_H
 
 #include <SFML/Graphics.hpp>
+#include <vector>
+#include <map>
+#include <SFML/Window/Keyboard.hpp>
+
+using namespace std;
 
 class Chip8{
     private:
@@ -26,16 +31,16 @@ class Chip8{
         void init();
 
         bool drawFlag;
-        unsigned char gfx[64*32];
+        vector<unsigned char> gfx;
 
     public:
-        unsigned char key[16]; //hex based (0x0 - 0xF) keypad for input
         Chip8();
         ~Chip8();
+        vector<sf::Uint8> getGFX();
+        bool isDraw();
         bool loadApplication(char const* filename);
         void emulateCycle();
-        void setKeys();
-        sf::Uint8* getGFX();
-        bool isDraw();
+
+        unsigned char keys[16];
 };
 #endif

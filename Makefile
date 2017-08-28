@@ -4,7 +4,7 @@ COMPILER =c++
 PNAME =Chip8-Emu
 #Compiler flags
 CFLAGS =-std=c++14
-CFLAGSOBJECT =-g -c
+CFLAGSOBJECT =$(CFLAGS) -g -c
 SFMLPROJECTFLAGS =-o $(PNAME) -lsfml-graphics -lsfml-window -lsfml-system
 #Sources
 MAIN =main.cpp
