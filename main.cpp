@@ -19,7 +19,6 @@ vector<sf::Uint8> transformToPix(vector<sf::Uint8> pixels, vector<unsigned char>
 void detectKeyPress();
 
 int main(int argc, char ** argv) {
-    chip8.init();
     if(argc < 2){
         cout << "Usage: ./Chip8-Emu \"Chip8_Rom_File\"" << endl;
         return 1;
@@ -56,21 +55,22 @@ int main(int argc, char ** argv) {
         detectKeyPress();
 
         //Update texture
-        //emulateCycle(gfx, position, offset);
         chip8.emulateCycle();
-        //pixels = getGFX(pixels, gfx);
-        pixels = transformToPix(chip8.getGFX(), pixels);
-        texture.update(&pixels[0]);
+        if(chip8.drawFlag){
+            pixels = transformToPix(chip8.getGFX(), pixels);
+            texture.update(&pixels[0]);
 
-        //Update sprite with texture
-        sprite.setTexture(texture);
+            //Update sprite with texture
+            sprite.setTexture(texture);
 
-        //Clear window
-        window.clear(sf::Color::Black);
+            //Clear window
+            window.clear(sf::Color::Black);
 
-        //Draw everything
-        window.draw(sprite);
-        window.display();
+            //Draw everything
+            window.draw(sprite);
+            window.display();
+        }
+        
     }
     return 0;
 }

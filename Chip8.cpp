@@ -99,7 +99,7 @@ void Chip8::emulateCycle(){
     cout << "0x" << hex << opcode << endl;
 
     //Decode opcode
-    switch(opcode & 0xF000){ //Get first letter
+    switch(opcode & 0xF000){
         
         case 0x0000:
         {
@@ -108,6 +108,7 @@ void Chip8::emulateCycle(){
                 case 0x0000:
                     for(int i = 0; i < (WIDTH*HEIGHT); i++)
                         gfx[i] = 0;
+                    drawFlag = true;
                     pc+=2;
                 break;
 
@@ -220,6 +221,7 @@ void Chip8::emulateCycle(){
                 case 0x0006:
                     V[15] = V[(opcode & 0x0F00) >> 8] & 0x0001;
                     V[(opcode & 0x0F00) >> 8] >>= 1; 
+                    pc+=2;
                 break;
 
                 //Opcode 0x8XY7 Sets VX to VY minus VX. VF is set to 
@@ -284,8 +286,8 @@ void Chip8::emulateCycle(){
         //to unset when the sprite is drawn, and to 0 if that doesn’t
         //happen
         case 0xD000: {
-            unsigned short x = V[(opcode * 0x0F00) >> 8];
-            unsigned short y = V[(opcode * 0x00F0) >> 4];
+            unsigned short x = V[(opcode & 0x0F00) >> 8];
+            unsigned short y = V[(opcode & 0x00F0) >> 4];
             unsigned short h = opcode & 0x000F;
             unsigned short pixel;
             cout << "X: " << x << " Y: " << y << " Height: " << h << endl;
@@ -368,7 +370,13 @@ void Chip8::emulateCycle(){
                 break;
 
                 //Opcode 0xFX1E Adds Vx to I
+                //VF is set to 1 when there is a range overflow (4095), 0 if there isn't
                 case 0x001E:
+                    if(I + V[opcode & 0x0F00 >> 8] > 0xFFF){
+                        V[0xF] = 1;
+                    }else{
+                        V[0xF] = 0;
+                    }
                     I += V[(opcode & 0x0F00) >> 8];
                     pc+=2;
                 break;
@@ -397,6 +405,8 @@ void Chip8::emulateCycle(){
                 case 0x0055:
                     for(int i = 0; i < V[(opcode & 0x0F00) >> 8]+1; i++)
                         memory[I+i] = V[i];
+
+                    I += ((opcode & 0x0F00) >> 8) + 1;
                     pc+=2;
                 break;
 
@@ -405,6 +415,8 @@ void Chip8::emulateCycle(){
                 case 0x0065:
                     for(int i = 0; i < V[(opcode & 0x0F00) >> 8]+1; i++)
                         V[i] = memory[I+i];
+
+                    I += ((opcode & 0x0F00) >> 8) + 1;
                     pc+=2;
                 break;
             }
@@ -469,11 +481,11 @@ bool Chip8::loadApplication(char const* filename){
 
 vector<sf::Uint8> Chip8::getGFX(){
     vector<sf::Uint8> pixels(WIDTH * HEIGHT * 4);
-    for(int i = 0; i < WIDTH*HEIGHT*4; i+=4) {
-        pixels[i] = gfx[i/4];
-        pixels[i+1] = gfx[i/4];
-        pixels[i+2] = gfx[i/4];
-        pixels[i+3] = gfx[i/4];
+    for(int i = 0; i < WIDTH*HEIGHT*4; i++) {
+        pixels[i] = gfx[i];
+        pixels[i+1] = gfx[i];
+        pixels[i+2] = gfx[i];
+        pixels[i+3] = gfx[i];
     }
     return pixels;
 }

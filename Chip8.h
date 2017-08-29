@@ -14,8 +14,6 @@ class Chip8{
         unsigned short I; //index register
 
         //Graphics are black and white and is 2048px(64x32)
-        bool draw_flag;
-
         //If greater than 0, both counters count down at 60Hz(60 opcodes per second)
         unsigned char delay_timer;
         unsigned char sound_timer;
@@ -27,7 +25,6 @@ class Chip8{
         
         void updateTimers();
 
-        bool drawFlag;
         vector<unsigned char> gfx;
 
     public:
@@ -40,5 +37,7 @@ class Chip8{
         void init();
 
         unsigned char keys[16];
+        bool drawFlag;
+
 };
 #endif
