@@ -35,7 +35,6 @@ int main(int argc, char ** argv) {
     sf::Sprite sprite;
     sf::Texture texture;
     vector<sf::Uint8> pixels(WIDTH*HEIGHT*4);
-    vector<unsigned char> gfx = vector<unsigned char>(WIDTH*HEIGHT, 0);
 
     if (!texture.create(WIDTH, HEIGHT))
         std::cout << "Error: texture could not be created" << std::endl;

@@ -3,6 +3,7 @@
 #include <cstdio>
 #include <ctime>
 #include <iomanip>
+#include <typeinfo>
 
 #include "Chip8.h"
 
@@ -55,12 +56,13 @@ void Chip8::init(){
     opcode = 0;
     I = 0;
     sp = 0;
-    gfx.resize(64*32);
-
+    //gfx.resize(64*32);
+    
     //Clear display
-    for(int i = 0; i < 2048; i++)
-        gfx[i] = 0;
-
+    for(int i = 0; i < (WIDTH*HEIGHT); i++)
+        gfx.push_back(0);
+        cout << sizeof(gfx) << endl;
+        cout << "Here" << endl;
     //Clear memory
     for(int i = 0; i < 4096; i++)
         memory[i] = 0;
@@ -106,9 +108,14 @@ void Chip8::emulateCycle(){
             switch (opcode & 0x000F){
                 //Opcode: 0x00E0 Clear the screen
                 case 0x0000:
-                    for(int i = 0; i < (WIDTH*HEIGHT); i++)
+                
+                    for(int i = 0; i < (WIDTH*HEIGHT); i++){
                         gfx[i] = 0;
+                        //cout << "We lit fam" << endl;
+                        //cout << typeid(gfx).name() << endl;
+                    }
                     drawFlag = true;
+                    
                     pc+=2;
                 break;
 
@@ -399,7 +406,6 @@ void Chip8::emulateCycle(){
                     pc+=2;
                 break;
 
-
                 //Opcode 0xFX55 Stores V0 to VX (including VX) in 
                 //memory starting at address I
                 case 0x0055:
@@ -413,7 +419,7 @@ void Chip8::emulateCycle(){
                 //Opcode 0xFX65 Fills V0 to VX (including VX) with 
                 //values from memory starting at address I
                 case 0x0065:
-                    for(int i = 0; i < V[(opcode & 0x0F00) >> 8]+1; i++)
+                    for(int i = 0; i <= V[(opcode & 0x0F00) >> 8]+1; i++)
                         V[i] = memory[I+i];
 
                     I += ((opcode & 0x0F00) >> 8) + 1;
