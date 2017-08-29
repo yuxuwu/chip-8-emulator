@@ -1,2 +1,0 @@
-fill out key table in main.cpp
-set up GLUT (opengl)
