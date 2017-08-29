@@ -10,27 +10,35 @@ using namespace std;
 
 //Chip8 chip8;
 
-#define WINSIZE_X 64
-#define WINSIZE_Y 32
-
-//vector<unsigned char> emulateCycle(vector<unsigned char>& gfx, int position, int offset);
-vector<sf::Uint8> getGFX(vector<sf::Uint8>& pixels, vector<unsigned char> gfx);
-void printPixels(vector<unsigned char> gfx);
-void detectKeyPress();
+#define WIDTH 64
+#define HEIGHT 32
 
 Chip8 chip8;
 
+vector<sf::Uint8> transformToPix(vector<sf::Uint8> pixels, vector<unsigned char> gfx);
+void detectKeyPress();
+
 int main(int argc, char ** argv) {
+    chip8.init();
+    if(argc < 2){
+        cout << "Usage: ./Chip8-Emu \"Chip8_Rom_File\"" << endl;
+        return 1;
+    }
+
+    //Load game
+    if(!chip8.loadApplication(argv[1])){
+        cout << "Rom file " << argv[1] << " not found" << endl;
+        return 1;
+    }
+
     srand(time(NULL));
-    sf::RenderWindow window(sf::VideoMode(WINSIZE_X, WINSIZE_Y), "Chip8-Emu");
+    sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Chip8-Emu");
     sf::Sprite sprite;
     sf::Texture texture;
-    vector<sf::Uint8> pixels(WINSIZE_X*WINSIZE_Y*4);
-    vector<unsigned char> gfx = vector<unsigned char>(WINSIZE_X*WINSIZE_Y, 0);
+    vector<sf::Uint8> pixels(WIDTH*HEIGHT*4);
+    vector<unsigned char> gfx = vector<unsigned char>(WIDTH*HEIGHT, 0);
 
-    // chip8.init();
-
-    if (!texture.create(WINSIZE_X, WINSIZE_Y))
+    if (!texture.create(WIDTH, HEIGHT))
         std::cout << "Error: texture could not be created" << std::endl;
 
     while(window.isOpen()) {
@@ -51,7 +59,7 @@ int main(int argc, char ** argv) {
         //emulateCycle(gfx, position, offset);
         chip8.emulateCycle();
         //pixels = getGFX(pixels, gfx);
-        pixels = chip8.getGFX();
+        pixels = transformToPix(chip8.getGFX(), pixels);
         texture.update(&pixels[0]);
 
         //Update sprite with texture
@@ -63,58 +71,26 @@ int main(int argc, char ** argv) {
         //Draw everything
         window.draw(sprite);
         window.display();
-        // position++;
-        // if(position > 64*32) position = 0;
     }
     return 0;
 }
 
-// //GFX is a 64*32 2 bit array
-// vector<sf::Uint8> getGFX(vector<sf::Uint8>& pixels, vector<unsigned char> gfx){
-//     for(int i = 0; i < WINSIZE_X*WINSIZE_Y; i++) {
-//         if(gfx[i]){
-//             pixels[i*4] = 255;   //R
-//             pixels[i*4+1] = 255; //G
-//             pixels[i*4+2] = 255; //B
-//             pixels[i*4+3] = 255; //A
-//         }else{
-//             pixels[i*4] = 0;
-//             pixels[i*4+1] = 0;
-//             pixels[i*4+2] = 0; 
-//             pixels[i*4+3] = 255;
-//         }
-//     }
-//     return pixels;
-// }
-
-/*
-vector<unsigned char> emulateCycle(vector<unsigned char>& gfx, int position, int offset){
-    if(position != 0){
-        gfx[position-1] = 0;
-    }
-    else{
-        gfx[WINSIZE_X*WINSIZE_Y] = 0;
-    }
-
-    for (int i = 0; i < offset; i++){
-        if(position >= 64*32)
-            position = 0;
-        gfx[position+i] = 1; 
-    }
-    return gfx;
-}
-*/
-
-void printPixels(vector<unsigned char> gfx){
-    for(int i = 0; i < WINSIZE_X; i++){
-        for(int j = 0; j < WINSIZE_Y; j++){
-            if(gfx[i*j])
-                cout << "1";
-            else
-                cout << "0";
+vector<sf::Uint8> transformToPix(vector<sf::Uint8> gfx, vector<sf::Uint8> pixels){
+    vector<sf::Uint8> new_pixels(WIDTH*HEIGHT*4);
+    for(int i = 0; i < WIDTH*HEIGHT; i++) {
+        if(gfx[i]){
+            new_pixels[i*4] = 255;   //R
+            new_pixels[i*4+1] = 255; //G
+            new_pixels[i*4+2] = 255; //B
+            new_pixels[i*4+3] = 255; //A
+        }else{
+            new_pixels[i*4] = 0;
+            new_pixels[i*4+1] = 0;
+            new_pixels[i*4+2] = 0; 
+            new_pixels[i*4+3] = 255;
         }
-        cout << endl;
     }
+    return new_pixels;
 }
 
 void detectKeyPress(){

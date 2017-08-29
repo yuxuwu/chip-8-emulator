@@ -3,8 +3,6 @@
 
 #include <SFML/Graphics.hpp>
 #include <vector>
-#include <map>
-#include <SFML/Window/Keyboard.hpp>
 
 using namespace std;
 
@@ -28,7 +26,6 @@ class Chip8{
         unsigned short pc; //program counter
         
         void updateTimers();
-        void init();
 
         bool drawFlag;
         vector<unsigned char> gfx;
@@ -40,6 +37,7 @@ class Chip8{
         bool isDraw();
         bool loadApplication(char const* filename);
         void emulateCycle();
+        void init();
 
         unsigned char keys[16];
 };

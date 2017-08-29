@@ -1,5 +1,5 @@
 #Makefile variables
-COMPILER =c++
+COMPILER =g++
 #Project name
 PNAME =Chip8-Emu
 #Compiler flags
