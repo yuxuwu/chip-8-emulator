@@ -61,8 +61,7 @@ void Chip8::init(){
     //Clear display
     for(int i = 0; i < (WIDTH*HEIGHT); i++)
         gfx.push_back(0);
-        cout << sizeof(gfx) << endl;
-        cout << "Here" << endl;
+
     //Clear memory
     for(int i = 0; i < 4096; i++)
         memory[i] = 0;
@@ -79,11 +78,6 @@ void Chip8::init(){
     for(int i = 0; i < 16; i++)
         keys[i] = 0;
 
-    //Set fontset
-    for(int i = 0; i < 80; i++)
-        memory[i] = fontset[i];
-
-
     //Reset timers
     delay_timer = 0;
     sound_timer = 0;
@@ -99,20 +93,19 @@ void Chip8::emulateCycle(){
     opcode = memory[pc] << 8 | memory[pc+1]; //merge 2bytes in memory to 4byte opcode
     
     cout << "0x" << hex << opcode << endl;
+    cout << "PC: " << pc << endl;
+    cout << "Stack position: " << sp << endl;
 
     //Decode opcode
     switch(opcode & 0xF000){
         
-        case 0x0000:
-        {
+        case 0x0000: {
             switch (opcode & 0x000F){
                 //Opcode: 0x00E0 Clear the screen
                 case 0x0000:
                 
                     for(int i = 0; i < (WIDTH*HEIGHT); i++){
                         gfx[i] = 0;
-                        //cout << "We lit fam" << endl;
-                        //cout << typeid(gfx).name() << endl;
                     }
                     drawFlag = true;
                     
@@ -121,12 +114,16 @@ void Chip8::emulateCycle(){
 
                 //Opcode: 0x00EE Return from subroutine
                 case 0x000E:
+                    cout << "Returning from subroutine" << endl;
                     sp--;
                     pc = stack[sp];
                     pc+=2;
+                    cout << "New pc: " << pc << endl;
                 break;
             }
+            break;
         }
+
         //Opcode 0x1NNN Jumps to address NNN
         case 0x1000:
             pc = opcode & 0x0FFF;
@@ -134,10 +131,14 @@ void Chip8::emulateCycle(){
         
         //Opcode 0x2NNN Calls subroutine at NNN
         case 0x2000:
+            cout << "Calling subroutine at 0x" << hex << (opcode & 0x0FFF) << endl;
             //Save the current address
+            cout <<"Saving current PC: " << pc << endl;
             stack[sp] = pc;
+            //Push down stack
             sp++;
-            pc = opcode & 0x0FFF;
+            //Set program counter to new address
+            pc = (opcode & 0x0FFF);
         break;
 
         //Opcde 0x3XNN Skips the next instruction if 
@@ -313,8 +314,8 @@ void Chip8::emulateCycle(){
 
             drawFlag = true;
             pc+=2;
-        }
         break;
+        }
 
         case 0xE000: {
             switch (opcode & 0x000F){
@@ -348,6 +349,7 @@ void Chip8::emulateCycle(){
                 //Opcode 0xFX0A A key press is awaited, and then stored in VX
                 case 0x000A: {
                     bool key_pressed = false;
+                    cout << "Waiting for a key press..." << endl;
                     for(unsigned char i = 0; i < 0xF; i++){
                         if(keys[i]){
                             cout << "Key was pressed" << endl;
@@ -379,11 +381,11 @@ void Chip8::emulateCycle(){
                 //Opcode 0xFX1E Adds Vx to I
                 //VF is set to 1 when there is a range overflow (4095), 0 if there isn't
                 case 0x001E:
-                    if(I + V[opcode & 0x0F00 >> 8] > 0xFFF){
+                    if(I + V[opcode & 0x0F00 >> 8] > 0xFFF)
                         V[0xF] = 1;
-                    }else{
+                    else
                         V[0xF] = 0;
-                    }
+
                     I += V[(opcode & 0x0F00) >> 8];
                     pc+=2;
                 break;
@@ -401,7 +403,7 @@ void Chip8::emulateCycle(){
                 //of Vx in three chunks at I, I+1, and I+2
                 case 0x0033:
                     memory[I] = V[(opcode & 0x0F00) >> 8] / 100;
-                    memory[I] = V[(opcode & 0x0F00) >> 8] /10 % 100;
+                    memory[I] = V[(opcode & 0x0F00) >> 8] /10 % 10;
                     memory[I] = V[(opcode & 0x0F00) >> 8] % 10;
                     pc+=2;
                 break;
@@ -419,8 +421,11 @@ void Chip8::emulateCycle(){
                 //Opcode 0xFX65 Fills V0 to VX (including VX) with 
                 //values from memory starting at address I
                 case 0x0065:
-                    for(int i = 0; i <= V[(opcode & 0x0F00) >> 8]+1; i++)
+                    for(int i = 0; i < (opcode & 0x0F00 >> 8)+1; i++){
+                        cout << "Index " << (I+i) << endl;
                         V[i] = memory[I+i];
+                    }
+                    cout << "Finished loop" << endl;
 
                     I += ((opcode & 0x0F00) >> 8) + 1;
                     pc+=2;
