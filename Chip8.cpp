@@ -182,22 +182,26 @@ void Chip8::emulateCycle(){
             switch (opcode & 0x000F){
                 //Opcode 0x8XY0 Sets VX to the value of VY
                 case 0x0000:
-                    V[(opcode & 0x0F00) >> 8] = V[opcode & 0x00F0];
+                    V[(opcode & 0x0F00) >> 8] = V[(opcode & 0x00F0) >> 4];
+                    pc+=2;
                 break;
 
                 //Opcode 0x8XY1 Sets VX to VX OR with VY
                 case 0x0001:
-                    V[(opcode & 0x0F00) >> 8] |= V[opcode & 0x00F0];
+                    V[(opcode & 0x0F00) >> 8] |= V[(opcode & 0x00F0) >> 4];
+                    pc+=2;
                 break;
 
                 //Opcode 0x8XY2 Sets VX to VX AND with VY
                 case 0x0002:
-                    V[(opcode & 0x0F00) >> 8] &= V[opcode & 0x00F0];
+                    V[(opcode & 0x0F00) >> 8] &= V[(opcode & 0x00F0) >> 4];
+                    pc+=2;
                 break;
 
                 //Opcode 0x8XY3 Sets VX to VX XOR with VY
                 case 0x0003:
                     V[(opcode & 0x0F00) >> 8] ^= V[opcode & 0x00F0] >> 4;
+                    pc+=2;
                 break;
 
                 //Opcode 0x8XY4 Adds VY to VX. VF is set 
@@ -206,8 +210,9 @@ void Chip8::emulateCycle(){
                     int sum = (V[(opcode & 0x0F00) >> 8]) + (V[opcode & 0x00F0] >> 4);
                     V[(opcode & 0x0F00) >> 8] = sum % 0XF;
                     V[15] = sum/0xF;
-                    break;
+                    pc+=2;
                 }
+                break;
 
                 //Opcode 0x8XY5 VY is subtracted from VX. VF is set to 0 
                 //when there's a borrow, and 1 when there isn't
@@ -221,8 +226,8 @@ void Chip8::emulateCycle(){
                         V[0xF] = 0;
                     }
                     pc+=2;
-                break;
                 }
+                break;
 
                 //Opcode 0x8XY6  Shifts VX right by one. VF is set to the 
                 //value of the least significant bit of VX before the shift
@@ -252,16 +257,16 @@ void Chip8::emulateCycle(){
                 case 0x000E:
                     V[15] = V[(opcode & 0x0F00) >> 8] & 0x8000;
                     V[(opcode & 0x0F00) >> 8] <<= 1;
+                    pc+=2;
                 break;
             }
-            pc+=2;
-        break;
         }
+        break;
 
         //Opcode 0x9XY0 Skips the next instruction if VX doesn't 
         //equal VY
         case 0x9000:
-            if(V[(opcode & 0x0F00) >> 8] != V[opcode & 0x00F0])
+            if(V[(opcode & 0x0F00) >> 8] != V[(opcode & 0x00F0) >> 4])
                 pc+=2;
             pc+=2;
         break;
@@ -274,8 +279,7 @@ void Chip8::emulateCycle(){
 
         //Opcode 0xBNNN Jumps to the address NNN plus V0
         case 0xB000:
-            pc = opcode & 0x0FFF + V[0];
-            pc+=2;
+            pc = (opcode & 0x0FFF) + V[0];
         break;
 
         //Opcode 0xCXNN Sets VX to the result of a 
@@ -296,26 +300,28 @@ void Chip8::emulateCycle(){
         case 0xD000: {
             unsigned short x = V[(opcode & 0x0F00) >> 8];
             unsigned short y = V[(opcode & 0x00F0) >> 4];
-            unsigned short h = opcode & 0x000F;
+            unsigned short height = opcode & 0x000F;
             unsigned short pixel;
-            cout << "X: " << x << " Y: " << y << " Height: " << h << endl;
+            cout << "X: " << x << " Y: " << y << " Height: " << height << endl;
 
             V[0xF] = 0;
-            for(int i = 0; i < h; i++){
-                pixel = memory[I+i];
-                for(int j = 0; j < 8; j++){
-                    if((pixel & (0x80 >> j))){
-                        if(gfx[(x + j + ((y + i) * 64))])
-                            V[0xF] = true;
-                        gfx[(x + j + ((y + i) * 64))] ^= 1;
+            for (int yline = 0; yline < height; yline++){
+                pixel = memory[I + yline];
+                for(int xline = 0; xline < 8; xline++){
+                    if((pixel & (0x80 >> xline)) != 0){
+                        if(gfx[(x + xline + ((y + yline) * 64))] == 1){
+                            V[0xF] = 1;                                    
+                        }
+                        gfx[x + xline + ((y + yline) * 64)] ^= 1;
                     }
                 }
             }
 
+
             drawFlag = true;
             pc+=2;
-        break;
         }
+        break;
 
         case 0xE000: {
             switch (opcode & 0x000F){
@@ -381,7 +387,7 @@ void Chip8::emulateCycle(){
                 //Opcode 0xFX1E Adds Vx to I
                 //VF is set to 1 when there is a range overflow (4095), 0 if there isn't
                 case 0x001E:
-                    if(I + V[opcode & 0x0F00 >> 8] > 0xFFF)
+                    if(I + V[(opcode & 0x0F00) >> 8] > 0xFFF)
                         V[0xF] = 1;
                     else
                         V[0xF] = 0;
@@ -403,15 +409,15 @@ void Chip8::emulateCycle(){
                 //of Vx in three chunks at I, I+1, and I+2
                 case 0x0033:
                     memory[I] = V[(opcode & 0x0F00) >> 8] / 100;
-                    memory[I] = V[(opcode & 0x0F00) >> 8] /10 % 10;
-                    memory[I] = V[(opcode & 0x0F00) >> 8] % 10;
+                    memory[I+1] = (V[(opcode & 0x0F00) >> 8] / 10) % 10;
+                    memory[I+2] = (V[(opcode & 0x0F00) >> 8] % 100) % 10;
                     pc+=2;
                 break;
 
                 //Opcode 0xFX55 Stores V0 to VX (including VX) in 
                 //memory starting at address I
                 case 0x0055:
-                    for(int i = 0; i < V[(opcode & 0x0F00) >> 8]+1; i++)
+                    for(int i = 0; i <= ((opcode & 0x0F00) >> 8); i++)
                         memory[I+i] = V[i];
 
                     I += ((opcode & 0x0F00) >> 8) + 1;

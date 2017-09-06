@@ -1,0 +1,1825 @@
+g++ -std=c++14 -g -c Chip8.cpp
+g++ main.o Chip8.o  -o Chip8-Emu -lsfml-graphics -lsfml-window -lsfml-system
+./Chip8-Emu roms/PONG2.c8
+0x22f6
+PC: 200
+Stack position: 0
+Calling subroutine at 0x2f6
+Saving current PC: 200
+0x6b20
+PC: 2f6
+Stack position: 1
+0x6c00
+PC: 2f8
+Stack position: 1
+0xa2ea
+PC: 2fa
+Stack position: 1
+0xdbc1
+PC: 2fc
+Stack position: 1
+X: 20 Y: 0 Height: 1
+0x7c01
+PC: 2fe
+Stack position: 1
+0x3c20
+PC: 300
+Stack position: 1
+0x12fc
+PC: 302
+Stack position: 1
+0xdbc1
+PC: 2fc
+Stack position: 1
+X: 20 Y: 1 Height: 1
+0x7c01
+PC: 2fe
+Stack position: 1
+0x3c20
+PC: 300
+Stack position: 1
+0x12fc
+PC: 302
+Stack position: 1
+0xdbc1
+PC: 2fc
+Stack position: 1
+X: 20 Y: 2 Height: 1
+0x7c01
+PC: 2fe
+Stack position: 1
+0x3c20
+PC: 300
+Stack position: 1
+0x12fc
+PC: 302
+Stack position: 1
+0xdbc1
+PC: 2fc
+Stack position: 1
+X: 20 Y: 3 Height: 1
+0x7c01
+PC: 2fe
+Stack position: 1
+0x3c20
+PC: 300
+Stack position: 1
+0x12fc
+PC: 302
+Stack position: 1
+0xdbc1
+PC: 2fc
+Stack position: 1
+X: 20 Y: 4 Height: 1
+0x7c01
+PC: 2fe
+Stack position: 1
+0x3c20
+PC: 300
+Stack position: 1
+0x12fc
+PC: 302
+Stack position: 1
+0xdbc1
+PC: 2fc
+Stack position: 1
+X: 20 Y: 5 Height: 1
+0x7c01
+PC: 2fe
+Stack position: 1
+0x3c20
+PC: 300
+Stack position: 1
+0x12fc
+PC: 302
+Stack position: 1
+0xdbc1
+PC: 2fc
+Stack position: 1
+X: 20 Y: 6 Height: 1
+0x7c01
+PC: 2fe
+Stack position: 1
+0x3c20
+PC: 300
+Stack position: 1
+0x12fc
+PC: 302
+Stack position: 1
+0xdbc1
+PC: 2fc
+Stack position: 1
+X: 20 Y: 7 Height: 1
+0x7c01
+PC: 2fe
+Stack position: 1
+0x3c20
+PC: 300
+Stack position: 1
+0x12fc
+PC: 302
+Stack position: 1
+0xdbc1
+PC: 2fc
+Stack position: 1
+X: 20 Y: 8 Height: 1
+0x7c01
+PC: 2fe
+Stack position: 1
+0x3c20
+PC: 300
+Stack position: 1
+0x12fc
+PC: 302
+Stack position: 1
+0xdbc1
+PC: 2fc
+Stack position: 1
+X: 20 Y: 9 Height: 1
+0x7c01
+PC: 2fe
+Stack position: 1
+0x3c20
+PC: 300
+Stack position: 1
+0x12fc
+PC: 302
+Stack position: 1
+0xdbc1
+PC: 2fc
+Stack position: 1
+X: 20 Y: a Height: 1
+0x7c01
+PC: 2fe
+Stack position: 1
+0x3c20
+PC: 300
+Stack position: 1
+0x12fc
+PC: 302
+Stack position: 1
+0xdbc1
+PC: 2fc
+Stack position: 1
+X: 20 Y: b Height: 1
+0x7c01
+PC: 2fe
+Stack position: 1
+0x3c20
+PC: 300
+Stack position: 1
+0x12fc
+PC: 302
+Stack position: 1
+0xdbc1
+PC: 2fc
+Stack position: 1
+X: 20 Y: c Height: 1
+0x7c01
+PC: 2fe
+Stack position: 1
+0x3c20
+PC: 300
+Stack position: 1
+0x12fc
+PC: 302
+Stack position: 1
+0xdbc1
+PC: 2fc
+Stack position: 1
+X: 20 Y: d Height: 1
+0x7c01
+PC: 2fe
+Stack position: 1
+0x3c20
+PC: 300
+Stack position: 1
+0x12fc
+PC: 302
+Stack position: 1
+0xdbc1
+PC: 2fc
+Stack position: 1
+X: 20 Y: e Height: 1
+0x7c01
+PC: 2fe
+Stack position: 1
+0x3c20
+PC: 300
+Stack position: 1
+0x12fc
+PC: 302
+Stack position: 1
+0xdbc1
+PC: 2fc
+Stack position: 1
+X: 20 Y: f Height: 1
+0x7c01
+PC: 2fe
+Stack position: 1
+0x3c20
+PC: 300
+Stack position: 1
+0x12fc
+PC: 302
+Stack position: 1
+0xdbc1
+PC: 2fc
+Stack position: 1
+X: 20 Y: 10 Height: 1
+0x7c01
+PC: 2fe
+Stack position: 1
+0x3c20
+PC: 300
+Stack position: 1
+0x12fc
+PC: 302
+Stack position: 1
+0xdbc1
+PC: 2fc
+Stack position: 1
+X: 20 Y: 11 Height: 1
+0x7c01
+PC: 2fe
+Stack position: 1
+0x3c20
+PC: 300
+Stack position: 1
+0x12fc
+PC: 302
+Stack position: 1
+0xdbc1
+PC: 2fc
+Stack position: 1
+X: 20 Y: 12 Height: 1
+0x7c01
+PC: 2fe
+Stack position: 1
+0x3c20
+PC: 300
+Stack position: 1
+0x12fc
+PC: 302
+Stack position: 1
+0xdbc1
+PC: 2fc
+Stack position: 1
+X: 20 Y: 13 Height: 1
+0x7c01
+PC: 2fe
+Stack position: 1
+0x3c20
+PC: 300
+Stack position: 1
+0x12fc
+PC: 302
+Stack position: 1
+0xdbc1
+PC: 2fc
+Stack position: 1
+X: 20 Y: 14 Height: 1
+0x7c01
+PC: 2fe
+Stack position: 1
+0x3c20
+PC: 300
+Stack position: 1
+0x12fc
+PC: 302
+Stack position: 1
+0xdbc1
+PC: 2fc
+Stack position: 1
+X: 20 Y: 15 Height: 1
+0x7c01
+PC: 2fe
+Stack position: 1
+0x3c20
+PC: 300
+Stack position: 1
+0x12fc
+PC: 302
+Stack position: 1
+0xdbc1
+PC: 2fc
+Stack position: 1
+X: 20 Y: 16 Height: 1
+0x7c01
+PC: 2fe
+Stack position: 1
+0x3c20
+PC: 300
+Stack position: 1
+0x12fc
+PC: 302
+Stack position: 1
+0xdbc1
+PC: 2fc
+Stack position: 1
+X: 20 Y: 17 Height: 1
+0x7c01
+PC: 2fe
+Stack position: 1
+0x3c20
+PC: 300
+Stack position: 1
+0x12fc
+PC: 302
+Stack position: 1
+0xdbc1
+PC: 2fc
+Stack position: 1
+X: 20 Y: 18 Height: 1
+0x7c01
+PC: 2fe
+Stack position: 1
+0x3c20
+PC: 300
+Stack position: 1
+0x12fc
+PC: 302
+Stack position: 1
+0xdbc1
+PC: 2fc
+Stack position: 1
+X: 20 Y: 19 Height: 1
+0x7c01
+PC: 2fe
+Stack position: 1
+0x3c20
+PC: 300
+Stack position: 1
+0x12fc
+PC: 302
+Stack position: 1
+0xdbc1
+PC: 2fc
+Stack position: 1
+X: 20 Y: 1a Height: 1
+0x7c01
+PC: 2fe
+Stack position: 1
+0x3c20
+PC: 300
+Stack position: 1
+0x12fc
+PC: 302
+Stack position: 1
+0xdbc1
+PC: 2fc
+Stack position: 1
+X: 20 Y: 1b Height: 1
+0x7c01
+PC: 2fe
+Stack position: 1
+0x3c20
+PC: 300
+Stack position: 1
+0x12fc
+PC: 302
+Stack position: 1
+0xdbc1
+PC: 2fc
+Stack position: 1
+X: 20 Y: 1c Height: 1
+0x7c01
+PC: 2fe
+Stack position: 1
+0x3c20
+PC: 300
+Stack position: 1
+0x12fc
+PC: 302
+Stack position: 1
+0xdbc1
+PC: 2fc
+Stack position: 1
+X: 20 Y: 1d Height: 1
+0x7c01
+PC: 2fe
+Stack position: 1
+0x3c20
+PC: 300
+Stack position: 1
+0x12fc
+PC: 302
+Stack position: 1
+0xdbc1
+PC: 2fc
+Stack position: 1
+X: 20 Y: 1e Height: 1
+0x7c01
+PC: 2fe
+Stack position: 1
+0x3c20
+PC: 300
+Stack position: 1
+0x12fc
+PC: 302
+Stack position: 1
+0xdbc1
+PC: 2fc
+Stack position: 1
+X: 20 Y: 1f Height: 1
+0x7c01
+PC: 2fe
+Stack position: 1
+0x3c20
+PC: 300
+Stack position: 1
+0x6a00
+PC: 304
+Stack position: 1
+0xee
+PC: 306
+Stack position: 1
+Returning from subroutine
+New pc: 202
+0x6b0c
+PC: 202
+Stack position: 0
+0x6c3f
+PC: 204
+Stack position: 0
+0x6d0c
+PC: 206
+Stack position: 0
+0xa2ea
+PC: 208
+Stack position: 0
+0xdab6
+PC: 20a
+Stack position: 0
+X: 0 Y: c Height: 6
+0xdcd6
+PC: 20c
+Stack position: 0
+X: 3f Y: c Height: 6
+0x6e00
+PC: 20e
+Stack position: 0
+0x22d4
+PC: 210
+Stack position: 0
+Calling subroutine at 0x2d4
+Saving current PC: 210
+0xa2f2
+PC: 2d4
+Stack position: 1
+0xfe33
+PC: 2d6
+Stack position: 1
+0xf265
+PC: 2d8
+Stack position: 1
+Index 2f2
+Index 2f3
+Index 2f4
+Index 2f5
+Index 2f6
+Index 2f7
+Finished loop
+0xf129
+PC: 2da
+Stack position: 1
+0x6414
+PC: 2dc
+Stack position: 1
+0x6500
+PC: 2de
+Stack position: 1
+0xd455
+PC: 2e0
+Stack position: 1
+X: 14 Y: 0 Height: 5
+0x7415
+PC: 2e2
+Stack position: 1
+0xf229
+PC: 2e4
+Stack position: 1
+0xd455
+PC: 2e6
+Stack position: 1
+X: 29 Y: 0 Height: 5
+0xee
+PC: 2e8
+Stack position: 1
+Returning from subroutine
+New pc: 212
+0x6603
+PC: 212
+Stack position: 0
+0x6802
+PC: 214
+Stack position: 0
+0x6060
+PC: 216
+Stack position: 0
+0xf015
+PC: 218
+Stack position: 0
+0xf007
+PC: 21a
+Stack position: 0
+0x3000
+PC: 21c
+Stack position: 0
+0x121a
+PC: 21e
+Stack position: 0
+0xf007
+PC: 21a
+Stack position: 0
+0x3000
+PC: 21c
+Stack position: 0
+0x121a
+PC: 21e
+Stack position: 0
+0xf007
+PC: 21a
+Stack position: 0
+0x3000
+PC: 21c
+Stack position: 0
+0x121a
+PC: 21e
+Stack position: 0
+0xf007
+PC: 21a
+Stack position: 0
+0x3000
+PC: 21c
+Stack position: 0
+0x121a
+PC: 21e
+Stack position: 0
+0xf007
+PC: 21a
+Stack position: 0
+0x3000
+PC: 21c
+Stack position: 0
+0x121a
+PC: 21e
+Stack position: 0
+0xf007
+PC: 21a
+Stack position: 0
+0x3000
+PC: 21c
+Stack position: 0
+0x121a
+PC: 21e
+Stack position: 0
+0xf007
+PC: 21a
+Stack position: 0
+0x3000
+PC: 21c
+Stack position: 0
+0x121a
+PC: 21e
+Stack position: 0
+0xf007
+PC: 21a
+Stack position: 0
+0x3000
+PC: 21c
+Stack position: 0
+0x121a
+PC: 21e
+Stack position: 0
+0xf007
+PC: 21a
+Stack position: 0
+0x3000
+PC: 21c
+Stack position: 0
+0x121a
+PC: 21e
+Stack position: 0
+0xf007
+PC: 21a
+Stack position: 0
+0x3000
+PC: 21c
+Stack position: 0
+0x121a
+PC: 21e
+Stack position: 0
+0xf007
+PC: 21a
+Stack position: 0
+0x3000
+PC: 21c
+Stack position: 0
+0x121a
+PC: 21e
+Stack position: 0
+0xf007
+PC: 21a
+Stack position: 0
+0x3000
+PC: 21c
+Stack position: 0
+0x121a
+PC: 21e
+Stack position: 0
+0xf007
+PC: 21a
+Stack position: 0
+0x3000
+PC: 21c
+Stack position: 0
+0x121a
+PC: 21e
+Stack position: 0
+0xf007
+PC: 21a
+Stack position: 0
+0x3000
+PC: 21c
+Stack position: 0
+0x121a
+PC: 21e
+Stack position: 0
+0xf007
+PC: 21a
+Stack position: 0
+0x3000
+PC: 21c
+Stack position: 0
+0x121a
+PC: 21e
+Stack position: 0
+0xf007
+PC: 21a
+Stack position: 0
+0x3000
+PC: 21c
+Stack position: 0
+0x121a
+PC: 21e
+Stack position: 0
+0xf007
+PC: 21a
+Stack position: 0
+0x3000
+PC: 21c
+Stack position: 0
+0x121a
+PC: 21e
+Stack position: 0
+0xf007
+PC: 21a
+Stack position: 0
+0x3000
+PC: 21c
+Stack position: 0
+0x121a
+PC: 21e
+Stack position: 0
+0xf007
+PC: 21a
+Stack position: 0
+0x3000
+PC: 21c
+Stack position: 0
+0x121a
+PC: 21e
+Stack position: 0
+0xf007
+PC: 21a
+Stack position: 0
+0x3000
+PC: 21c
+Stack position: 0
+0x121a
+PC: 21e
+Stack position: 0
+0xf007
+PC: 21a
+Stack position: 0
+0x3000
+PC: 21c
+Stack position: 0
+0x121a
+PC: 21e
+Stack position: 0
+0xf007
+PC: 21a
+Stack position: 0
+0x3000
+PC: 21c
+Stack position: 0
+0x121a
+PC: 21e
+Stack position: 0
+0xf007
+PC: 21a
+Stack position: 0
+0x3000
+PC: 21c
+Stack position: 0
+0x121a
+PC: 21e
+Stack position: 0
+0xf007
+PC: 21a
+Stack position: 0
+0x3000
+PC: 21c
+Stack position: 0
+0x121a
+PC: 21e
+Stack position: 0
+0xf007
+PC: 21a
+Stack position: 0
+0x3000
+PC: 21c
+Stack position: 0
+0x121a
+PC: 21e
+Stack position: 0
+0xf007
+PC: 21a
+Stack position: 0
+0x3000
+PC: 21c
+Stack position: 0
+0x121a
+PC: 21e
+Stack position: 0
+0xf007
+PC: 21a
+Stack position: 0
+0x3000
+PC: 21c
+Stack position: 0
+0x121a
+PC: 21e
+Stack position: 0
+0xf007
+PC: 21a
+Stack position: 0
+0x3000
+PC: 21c
+Stack position: 0
+0x121a
+PC: 21e
+Stack position: 0
+0xf007
+PC: 21a
+Stack position: 0
+0x3000
+PC: 21c
+Stack position: 0
+0x121a
+PC: 21e
+Stack position: 0
+0xf007
+PC: 21a
+Stack position: 0
+0x3000
+PC: 21c
+Stack position: 0
+0x121a
+PC: 21e
+Stack position: 0
+0xf007
+PC: 21a
+Stack position: 0
+0x3000
+PC: 21c
+Stack position: 0
+0x121a
+PC: 21e
+Stack position: 0
+0xf007
+PC: 21a
+Stack position: 0
+0x3000
+PC: 21c
+Stack position: 0
+0x121a
+PC: 21e
+Stack position: 0
+0xf007
+PC: 21a
+Stack position: 0
+0x3000
+PC: 21c
+Stack position: 0
+0xc717
+PC: 220
+Stack position: 0
+0x7708
+PC: 222
+Stack position: 0
+0x69ff
+PC: 224
+Stack position: 0
+0xa2f0
+PC: 226
+Stack position: 0
+0xd671
+PC: 228
+Stack position: 0
+X: 3 Y: b Height: 1
+0xa2ea
+PC: 22a
+Stack position: 0
+0xdab6
+PC: 22c
+Stack position: 0
+X: 0 Y: c Height: 6
+0xdcd6
+PC: 22e
+Stack position: 0
+X: 3f Y: c Height: 6
+0x6001
+PC: 230
+Stack position: 0
+0xe0a1
+PC: 232
+Stack position: 0
+0x6004
+PC: 236
+Stack position: 0
+0xe0a1
+PC: 238
+Stack position: 0
+0x601f
+PC: 23c
+Stack position: 0
+0x8b02
+PC: 23e
+Stack position: 0
+0xdab6
+PC: 240
+Stack position: 0
+X: 0 Y: c Height: 6
+0x600c
+PC: 242
+Stack position: 0
+0xe0a1
+PC: 244
+Stack position: 0
+0x600d
+PC: 248
+Stack position: 0
+0xe0a1
+PC: 24a
+Stack position: 0
+0x601f
+PC: 24e
+Stack position: 0
+0x8d02
+PC: 250
+Stack position: 0
+0xdcd6
+PC: 252
+Stack position: 0
+X: 3f Y: c Height: 6
+0xa2f0
+PC: 254
+Stack position: 0
+0xd671
+PC: 256
+Stack position: 0
+X: 3 Y: b Height: 1
+0x8684
+PC: 258
+Stack position: 0
+0x8794
+PC: 25a
+Stack position: 0
+0x603f
+PC: 25c
+Stack position: 0
+0x8602
+PC: 25e
+Stack position: 0
+0x611f
+PC: 260
+Stack position: 0
+0x8712
+PC: 262
+Stack position: 0
+0x4600
+PC: 264
+Stack position: 0
+0x463f
+PC: 268
+Stack position: 0
+0x471f
+PC: 26c
+Stack position: 0
+0x4700
+PC: 270
+Stack position: 0
+0xd671
+PC: 274
+Stack position: 0
+X: 3 Y: 1 Height: 1
+0x122a
+PC: 276
+Stack position: 0
+0xa2ea
+PC: 22a
+Stack position: 0
+0xdab6
+PC: 22c
+Stack position: 0
+X: 0 Y: c Height: 6
+0xdcd6
+PC: 22e
+Stack position: 0
+X: 3f Y: c Height: 6
+0x6001
+PC: 230
+Stack position: 0
+0xe0a1
+PC: 232
+Stack position: 0
+0x6004
+PC: 236
+Stack position: 0
+0xe0a1
+PC: 238
+Stack position: 0
+0x601f
+PC: 23c
+Stack position: 0
+0x8b02
+PC: 23e
+Stack position: 0
+0xdab6
+PC: 240
+Stack position: 0
+X: 0 Y: c Height: 6
+0x600c
+PC: 242
+Stack position: 0
+0xe0a1
+PC: 244
+Stack position: 0
+0x600d
+PC: 248
+Stack position: 0
+0xe0a1
+PC: 24a
+Stack position: 0
+0x601f
+PC: 24e
+Stack position: 0
+0x8d02
+PC: 250
+Stack position: 0
+0xdcd6
+PC: 252
+Stack position: 0
+X: 3f Y: c Height: 6
+0xa2f0
+PC: 254
+Stack position: 0
+0xd671
+PC: 256
+Stack position: 0
+X: 3 Y: 1 Height: 1
+0x8684
+PC: 258
+Stack position: 0
+0x8794
+PC: 25a
+Stack position: 0
+0x603f
+PC: 25c
+Stack position: 0
+0x8602
+PC: 25e
+Stack position: 0
+0x611f
+PC: 260
+Stack position: 0
+0x8712
+PC: 262
+Stack position: 0
+0x4600
+PC: 264
+Stack position: 0
+0x463f
+PC: 268
+Stack position: 0
+0x471f
+PC: 26c
+Stack position: 0
+0x4700
+PC: 270
+Stack position: 0
+0xd671
+PC: 274
+Stack position: 0
+X: 3 Y: 6 Height: 1
+0x122a
+PC: 276
+Stack position: 0
+0xa2ea
+PC: 22a
+Stack position: 0
+0xdab6
+PC: 22c
+Stack position: 0
+X: 0 Y: c Height: 6
+0xdcd6
+PC: 22e
+Stack position: 0
+X: 3f Y: c Height: 6
+0x6001
+PC: 230
+Stack position: 0
+0xe0a1
+PC: 232
+Stack position: 0
+0x6004
+PC: 236
+Stack position: 0
+0xe0a1
+PC: 238
+Stack position: 0
+0x601f
+PC: 23c
+Stack position: 0
+0x8b02
+PC: 23e
+Stack position: 0
+0xdab6
+PC: 240
+Stack position: 0
+X: 0 Y: c Height: 6
+0x600c
+PC: 242
+Stack position: 0
+0xe0a1
+PC: 244
+Stack position: 0
+0x600d
+PC: 248
+Stack position: 0
+0xe0a1
+PC: 24a
+Stack position: 0
+0x601f
+PC: 24e
+Stack position: 0
+0x8d02
+PC: 250
+Stack position: 0
+0xdcd6
+PC: 252
+Stack position: 0
+X: 3f Y: c Height: 6
+0xa2f0
+PC: 254
+Stack position: 0
+0xd671
+PC: 256
+Stack position: 0
+X: 3 Y: 6 Height: 1
+0x8684
+PC: 258
+Stack position: 0
+0x8794
+PC: 25a
+Stack position: 0
+0x603f
+PC: 25c
+Stack position: 0
+0x8602
+PC: 25e
+Stack position: 0
+0x611f
+PC: 260
+Stack position: 0
+0x8712
+PC: 262
+Stack position: 0
+0x4600
+PC: 264
+Stack position: 0
+0x463f
+PC: 268
+Stack position: 0
+0x471f
+PC: 26c
+Stack position: 0
+0x4700
+PC: 270
+Stack position: 0
+0xd671
+PC: 274
+Stack position: 0
+X: 3 Y: b Height: 1
+0x122a
+PC: 276
+Stack position: 0
+0xa2ea
+PC: 22a
+Stack position: 0
+0xdab6
+PC: 22c
+Stack position: 0
+X: 0 Y: c Height: 6
+0xdcd6
+PC: 22e
+Stack position: 0
+X: 3f Y: c Height: 6
+0x6001
+PC: 230
+Stack position: 0
+0xe0a1
+PC: 232
+Stack position: 0
+0x6004
+PC: 236
+Stack position: 0
+0xe0a1
+PC: 238
+Stack position: 0
+0x601f
+PC: 23c
+Stack position: 0
+0x8b02
+PC: 23e
+Stack position: 0
+0xdab6
+PC: 240
+Stack position: 0
+X: 0 Y: c Height: 6
+0x600c
+PC: 242
+Stack position: 0
+0xe0a1
+PC: 244
+Stack position: 0
+0x600d
+PC: 248
+Stack position: 0
+0xe0a1
+PC: 24a
+Stack position: 0
+0x601f
+PC: 24e
+Stack position: 0
+0x8d02
+PC: 250
+Stack position: 0
+0xdcd6
+PC: 252
+Stack position: 0
+X: 3f Y: c Height: 6
+0xa2f0
+PC: 254
+Stack position: 0
+0xd671
+PC: 256
+Stack position: 0
+X: 3 Y: b Height: 1
+0x8684
+PC: 258
+Stack position: 0
+0x8794
+PC: 25a
+Stack position: 0
+0x603f
+PC: 25c
+Stack position: 0
+0x8602
+PC: 25e
+Stack position: 0
+0x611f
+PC: 260
+Stack position: 0
+0x8712
+PC: 262
+Stack position: 0
+0x4600
+PC: 264
+Stack position: 0
+0x463f
+PC: 268
+Stack position: 0
+0x471f
+PC: 26c
+Stack position: 0
+0x4700
+PC: 270
+Stack position: 0
+0xd671
+PC: 274
+Stack position: 0
+X: 3 Y: 1 Height: 1
+0x122a
+PC: 276
+Stack position: 0
+0xa2ea
+PC: 22a
+Stack position: 0
+0xdab6
+PC: 22c
+Stack position: 0
+X: 0 Y: c Height: 6
+0xdcd6
+PC: 22e
+Stack position: 0
+X: 3f Y: c Height: 6
+0x6001
+PC: 230
+Stack position: 0
+0xe0a1
+PC: 232
+Stack position: 0
+0x6004
+PC: 236
+Stack position: 0
+0xe0a1
+PC: 238
+Stack position: 0
+0x601f
+PC: 23c
+Stack position: 0
+0x8b02
+PC: 23e
+Stack position: 0
+0xdab6
+PC: 240
+Stack position: 0
+X: 0 Y: c Height: 6
+0x600c
+PC: 242
+Stack position: 0
+0xe0a1
+PC: 244
+Stack position: 0
+0x600d
+PC: 248
+Stack position: 0
+0xe0a1
+PC: 24a
+Stack position: 0
+0x601f
+PC: 24e
+Stack position: 0
+0x8d02
+PC: 250
+Stack position: 0
+0xdcd6
+PC: 252
+Stack position: 0
+X: 3f Y: c Height: 6
+0xa2f0
+PC: 254
+Stack position: 0
+0xd671
+PC: 256
+Stack position: 0
+X: 3 Y: 1 Height: 1
+0x8684
+PC: 258
+Stack position: 0
+0x8794
+PC: 25a
+Stack position: 0
+0x603f
+PC: 25c
+Stack position: 0
+0x8602
+PC: 25e
+Stack position: 0
+0x611f
+PC: 260
+Stack position: 0
+0x8712
+PC: 262
+Stack position: 0
+0x4600
+PC: 264
+Stack position: 0
+0x463f
+PC: 268
+Stack position: 0
+0x471f
+PC: 26c
+Stack position: 0
+0x4700
+PC: 270
+Stack position: 0
+0xd671
+PC: 274
+Stack position: 0
+X: 3 Y: 6 Height: 1
+0x122a
+PC: 276
+Stack position: 0
+0xa2ea
+PC: 22a
+Stack position: 0
+0xdab6
+PC: 22c
+Stack position: 0
+X: 0 Y: c Height: 6
+0xdcd6
+PC: 22e
+Stack position: 0
+X: 3f Y: c Height: 6
+0x6001
+PC: 230
+Stack position: 0
+0xe0a1
+PC: 232
+Stack position: 0
+0x6004
+PC: 236
+Stack position: 0
+0xe0a1
+PC: 238
+Stack position: 0
+0x601f
+PC: 23c
+Stack position: 0
+0x8b02
+PC: 23e
+Stack position: 0
+0xdab6
+PC: 240
+Stack position: 0
+X: 0 Y: c Height: 6
+0x600c
+PC: 242
+Stack position: 0
+0xe0a1
+PC: 244
+Stack position: 0
+0x600d
+PC: 248
+Stack position: 0
+0xe0a1
+PC: 24a
+Stack position: 0
+0x601f
+PC: 24e
+Stack position: 0
+0x8d02
+PC: 250
+Stack position: 0
+0xdcd6
+PC: 252
+Stack position: 0
+X: 3f Y: c Height: 6
+0xa2f0
+PC: 254
+Stack position: 0
+0xd671
+PC: 256
+Stack position: 0
+X: 3 Y: 6 Height: 1
+0x8684
+PC: 258
+Stack position: 0
+0x8794
+PC: 25a
+Stack position: 0
+0x603f
+PC: 25c
+Stack position: 0
+0x8602
+PC: 25e
+Stack position: 0
+0x611f
+PC: 260
+Stack position: 0
+0x8712
+PC: 262
+Stack position: 0
+0x4600
+PC: 264
+Stack position: 0
+0x463f
+PC: 268
+Stack position: 0
+0x471f
+PC: 26c
+Stack position: 0
+0x4700
+PC: 270
+Stack position: 0
+0xd671
+PC: 274
+Stack position: 0
+X: 3 Y: b Height: 1
+0x122a
+PC: 276
+Stack position: 0
+0xa2ea
+PC: 22a
+Stack position: 0
+0xdab6
+PC: 22c
+Stack position: 0
+X: 0 Y: c Height: 6
+0xdcd6
+PC: 22e
+Stack position: 0
+X: 3f Y: c Height: 6
+0x6001
+PC: 230
+Stack position: 0
+0xe0a1
+PC: 232
+Stack position: 0
+0x6004
+PC: 236
+Stack position: 0
+0xe0a1
+PC: 238
+Stack position: 0
+0x601f
+PC: 23c
+Stack position: 0
+0x8b02
+PC: 23e
+Stack position: 0
+0xdab6
+PC: 240
+Stack position: 0
+X: 0 Y: c Height: 6
+0x600c
+PC: 242
+Stack position: 0
+0xe0a1
+PC: 244
+Stack position: 0
+0x600d
+PC: 248
+Stack position: 0
+0xe0a1
+PC: 24a
+Stack position: 0
+0x601f
+PC: 24e
+Stack position: 0
+0x8d02
+PC: 250
+Stack position: 0
+0xdcd6
+PC: 252
+Stack position: 0
+X: 3f Y: c Height: 6
+0xa2f0
+PC: 254
+Stack position: 0
+0xd671
+PC: 256
+Stack position: 0
+X: 3 Y: b Height: 1
+0x8684
+PC: 258
+Stack position: 0
+0x8794
+PC: 25a
+Stack position: 0
+0x603f
+PC: 25c
+Stack position: 0
+0x8602
+PC: 25e
+Stack position: 0
+0x611f
+PC: 260
+Stack position: 0
+0x8712
+PC: 262
+Stack position: 0
+0x4600
+PC: 264
+Stack position: 0
+0x463f
+PC: 268
+Stack position: 0
+0x471f
+PC: 26c
+Stack position: 0
+0x4700
+PC: 270
+Stack position: 0
+0xd671
+PC: 274
+Stack position: 0
+X: 3 Y: 1 Height: 1
+0x122a
+PC: 276
+Stack position: 0
+0xa2ea
+PC: 22a
+Stack position: 0
+0xdab6
+PC: 22c
+Stack position: 0
+X: 0 Y: c Height: 6
+0xdcd6
+PC: 22e
+Stack position: 0
+X: 3f Y: c Height: 6
+0x6001
+PC: 230
+Stack position: 0
+0xe0a1
+PC: 232
+Stack position: 0
+0x6004
+PC: 236
+Stack position: 0
+0xe0a1
+PC: 238
+Stack position: 0
+0x601f
+PC: 23c
+Stack position: 0
+0x8b02
+PC: 23e
+Stack position: 0
+0xdab6
+PC: 240
+Stack position: 0
+X: 0 Y: c Height: 6
+0x600c
+PC: 242
+Stack position: 0
+0xe0a1
+PC: 244
+Stack position: 0
+0x600d
+PC: 248
+Stack position: 0
+0xe0a1
+PC: 24a
+Stack position: 0
+0x601f
+PC: 24e
+Stack position: 0
+0x8d02
+PC: 250
+Stack position: 0
+0xdcd6
+PC: 252
+Stack position: 0
+X: 3f Y: c Height: 6
+0xa2f0
+PC: 254
+Stack position: 0
+0xd671
+PC: 256
+Stack position: 0
+X: 3 Y: 1 Height: 1
+0x8684
+PC: 258
+Stack position: 0
+0x8794
+PC: 25a
+Stack position: 0
+0x603f
+PC: 25c
+Stack position: 0
+0x8602
+PC: 25e
+Stack position: 0
+0x611f
+PC: 260
+Stack position: 0
+0x8712
+PC: 262
+Stack position: 0
+0x4600
+PC: 264
+Stack position: 0
+0x463f
+PC: 268
+Stack position: 0
+0x471f
+PC: 26c
+Stack position: 0
+0x4700
+PC: 270
+Stack position: 0
+0xd671
+PC: 274
+Stack position: 0
+X: 3 Y: 6 Height: 1
+0x122a
+PC: 276
+Stack position: 0
+0xa2ea
+PC: 22a
+Stack position: 0
+0xdab6
+PC: 22c
+Stack position: 0
+X: 0 Y: c Height: 6
+0xdcd6
+PC: 22e
+Stack position: 0
+X: 3f Y: c Height: 6
+0x6001
+PC: 230
+Stack position: 0
+0xe0a1
+PC: 232
+Stack position: 0
+0x6004
+PC: 236
+Stack position: 0
+0xe0a1
+PC: 238
+Stack position: 0
+0x601f
+PC: 23c
+Stack position: 0
+0x8b02
+PC: 23e
+Stack position: 0
+0xdab6
+PC: 240
+Stack position: 0
+X: 0 Y: c Height: 6
+0x600c
+PC: 242
+Stack position: 0
+0xe0a1
+PC: 244
+Stack position: 0
+0x600d
+PC: 248
+Stack position: 0
+0xe0a1
+PC: 24a
+Stack position: 0
+0x601f
+PC: 24e
+Stack position: 0
+0x8d02
+PC: 250
+Stack position: 0
+0xdcd6
+PC: 252
+Stack position: 0
+X: 3f Y: c Height: 6
+0xa2f0
+PC: 254
+Stack position: 0
+0xd671
+PC: 256
+Stack position: 0
+X: 3 Y: 6 Height: 1
+0x8684
+PC: 258
+Stack position: 0
+0x8794
+PC: 25a
+Stack position: 0
+0x603f
+PC: 25c
+Stack position: 0
+0x8602
+PC: 25e
+Stack position: 0
+0x611f
+PC: 260
+Stack position: 0
+0x8712
+PC: 262
+Stack position: 0
+0x4600
+PC: 264
+Stack position: 0
+0x463f
+PC: 268
+Stack position: 0
+0x471f
+PC: 26c
+Stack position: 0
+0x4700
+PC: 270
+Stack position: 0
+0xd671
+PC: 274
+Stack position: 0
+X: 3 Y: b Height: 1
+0x122a
+PC: 276
+Stack position: 0
+0xa2ea
+PC: 22a
+Stack position: 0
+0xdab6
+PC: 22c
+Stack position: 0
+X: 0 Y: c Height: 6
+0xdcd6
+PC: 22e
+Stack position: 0
+X: 3f Y: c Height: 6
+0x6001
+PC: 230
+Stack position: 0
+0xe0a1
+PC: 232
+Stack position: 0
+0x6004
+PC: 236
+Stack position: 0
+0xe0a1
+PC: 238
+Stack position: 0
+0x601f
+PC: 23c
+Stack position: 0
+0x8b02
+PC: 23e
+Stack position: 0
+0xdab6
+PC: 240
+Stack position: 0
+X: 0 Y: c Height: 6
+0x600c
+PC: 242
+Stack position: 0
+0xe0a1
+PC: 244
+Stack position: 0
+0x600d
+PC: 248
+Stack position: 0
+0xe0a1
+PC: 24a
+Stack position: 0
+0x601f
+PC: 24e
+Stack position: 0
+0x8d02
+PC: 250
+Stack position: 0
+0xdcd6
+PC: 252
+Stack position: 0
+X: 3f Y: c Height: 6
+0xa2f0
+PC: 254
+Stack position: 0
+0xd671
+PC: 256
+Stack position: 0
+X: 3 Y: b Height: 1
+0x8684
+PC: 258
+Stack position: 0
+0x8794
+PC: 25a
+Stack position: 0
+0x603f
+PC: 25c
+Stack position: 0
+0x8602
+PC: 25e
+Stack position: 0
+0x611f
+PC: 260
+Stack position: 0
+0x8712
+PC: 262
+Stack position: 0
+0x4600
+PC: 264
+Stack position: 0
+0x463f
+PC: 268
+Stack position: 0
+0x471f
+PC: 26c
+Stack position: 0
+0x4700
+PC: 270
+Stack position: 0
+0xd671
+PC: 274
+Stack position: 0
+X: 3 Y: 1 Height: 1
+0x122a
+PC: 276
+Stack position: 0
+0xa2ea
+PC: 22a
+Stack position: 0
