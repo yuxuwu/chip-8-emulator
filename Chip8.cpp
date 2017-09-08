@@ -9,27 +9,26 @@
 
 #define WIDTH 64
 #define HEIGHT 32
-#define key sf::Keyboard
 
 using namespace std;
 
-unsigned char fontset[80] = {
-    0xF0, 0x90, 0x90, 0x90, 0xF0, //0 
-    0x20, 0x60, 0x20, 0x20, 0x70, //1 
-    0xF0, 0x10, 0xF0, 0x80, 0xF0, //2 
-    0xF0, 0x10, 0xF0, 0x10, 0xF0, //3 
-    0x90, 0x90, 0xF0, 0x10, 0x10, //4 
-    0xF0, 0x80, 0xF0, 0x90, 0xF0, //5 
-    0xF0, 0x80, 0xF0, 0x90, 0xF0, //6 
-    0xF0, 0x90, 0xF0, 0x90, 0xF0, //8 
-    0xF0, 0x90, 0xF0, 0x10, 0xF0, //9 
-    0xF0, 0x10, 0x20, 0x40, 0x40, //7 
-    0xF0, 0x90, 0xF0, 0x90, 0x90, //A 
-    0xE0, 0x90, 0xE0, 0x90, 0xE0, //B 
-    0XF0, 0x80, 0x80, 0x80, 0xF0, //C 
-    0xF0, 0x90, 0x90, 0x90, 0xE0, //D 
-    0xF0, 0x80, 0xF0, 0x80, 0xF0, //E 
-    0xF0, 0x80, 0xF0, 0x80, 0x80  //F 
+const unsigned char fontset[80] = {
+    0xF0, 0x90, 0x90, 0x90, 0xF0,		// 0
+	0x20, 0x60, 0x20, 0x20, 0x70,		// 1
+	0xF0, 0x10, 0xF0, 0x80, 0xF0,		// 2
+	0xF0, 0x10, 0xF0, 0x10, 0xF0,		// 3
+	0x90, 0x90, 0xF0, 0x10, 0x10,		// 4
+	0xF0, 0x80, 0xF0, 0x10, 0xF0,		// 5
+	0xF0, 0x80, 0xF0, 0x90, 0xF0,		// 6
+	0xF0, 0x10, 0x20, 0x40, 0x40,		// 7
+	0xF0, 0x90, 0xF0, 0x90, 0xF0,		// 8
+	0xF0, 0x90, 0xF0, 0x10, 0xF0,		// 9
+	0xF0, 0x90, 0xF0, 0x90, 0x90,		// A
+	0xE0, 0x90, 0xE0, 0x90, 0xE0,		// B
+	0xF0, 0x80, 0x80, 0x80, 0xF0,		// C
+	0xE0, 0x90, 0x90, 0x90, 0xE0,		// D
+	0xF0, 0x80, 0xF0, 0x80, 0xF0,		// E
+    0xF0, 0x80, 0xF0, 0x80, 0x80	// F
 };
 
 void Chip8::updateTimers(){
@@ -38,7 +37,7 @@ void Chip8::updateTimers(){
 
     if(sound_timer > 0){
         if(sound_timer == 1)
-            cout << "BEEP!" << endl;
+            cerr << "BEEP!" << endl;
         sound_timer--;
     }
 }
@@ -56,7 +55,6 @@ void Chip8::init(){
     opcode = 0;
     I = 0;
     sp = 0;
-    //gfx.resize(64*32);
     
     //Clear display
     for(int i = 0; i < (WIDTH*HEIGHT); i++)
@@ -65,6 +63,10 @@ void Chip8::init(){
     //Clear memory
     for(int i = 0; i < 4096; i++)
         memory[i] = 0;
+
+    //Load fontset
+    for(int i = 0; i < 80; i++)
+        memory[i] = fontset[i];
 
     //Clear stack
     for(int i = 0; i < 16; i++)
@@ -92,9 +94,9 @@ void Chip8::emulateCycle(){
     //Fetch opcode
     opcode = memory[pc] << 8 | memory[pc+1]; //merge 2bytes in memory to 4byte opcode
     
-    cout << "0x" << hex << opcode << endl;
-    cout << "PC: " << pc << endl;
-    cout << "Stack position: " << sp << endl;
+    cerr << "0x" << hex << opcode << endl;
+    cerr << "PC: " << pc << endl;
+    cerr << "Stack position: " << sp << endl;
 
     //Decode opcode
     switch(opcode & 0xF000){
@@ -114,11 +116,11 @@ void Chip8::emulateCycle(){
 
                 //Opcode: 0x00EE Return from subroutine
                 case 0x000E:
-                    cout << "Returning from subroutine" << endl;
+                    cerr << "Returning from subroutine" << endl;
                     sp--;
                     pc = stack[sp];
                     pc+=2;
-                    cout << "New pc: " << pc << endl;
+                    cerr << "New pc: " << pc << endl;
                 break;
             }
             break;
@@ -131,9 +133,9 @@ void Chip8::emulateCycle(){
         
         //Opcode 0x2NNN Calls subroutine at NNN
         case 0x2000:
-            cout << "Calling subroutine at 0x" << hex << (opcode & 0x0FFF) << endl;
+            cerr << "Calling subroutine at 0x" << hex << (opcode & 0x0FFF) << endl;
             //Save the current address
-            cout <<"Saving current PC: " << pc << endl;
+            cerr <<"Saving current PC: " << pc << endl;
             stack[sp] = pc;
             //Push down stack
             sp++;
@@ -207,9 +209,11 @@ void Chip8::emulateCycle(){
                 //Opcode 0x8XY4 Adds VY to VX. VF is set 
                 //to 1 when there's a carry, and to 0 when there isn't
                 case 0x0004: {
-                    int sum = (V[(opcode & 0x0F00) >> 8]) + (V[opcode & 0x00F0] >> 4);
-                    V[(opcode & 0x0F00) >> 8] = sum % 0XF;
-                    V[15] = sum/0xF;
+                    if(V[(opcode & 0x00F0) >> 4] > (0xFF - V[(opcode & 0x0F00) >> 8]))
+                        V[0xF] = 1; //carry
+                    else
+                        V[0xF] = 0;
+                    V[(opcode & 0x0F00) >> 8] += V[(opcode & 0x00F0) >> 4];
                     pc+=2;
                 }
                 break;
@@ -217,14 +221,11 @@ void Chip8::emulateCycle(){
                 //Opcode 0x8XY5 VY is subtracted from VX. VF is set to 0 
                 //when there's a borrow, and 1 when there isn't
                 case 0x0005: {
-                    int difference_0 = (V[(opcode & 0x0F00) >> 8]) - (V[opcode & 0x00F0] >> 4);
-                    if(difference_0 >= 0){ 
-                        V[(opcode & 0x00F0) >> 4] = difference_0;
+                    if(V[(opcode & 0x00F0) >> 4] > V[(opcode & 0x0F00) >> 8]) 
+                        V[0xF] = 0; //there is a borrow
+                    else
                         V[0xF] = 1;
-                    }else{
-                        V[(opcode & 0x00F0) >> 4] = V[(opcode & 0x00F0) >> 4] + 0xF - V[(opcode & 0x0F00) >> 8];
-                        V[0xF] = 0;
-                    }
+                    V[(opcode & 0x0F00) >> 8] -= V[(opcode & 0x00F0) >> 4];
                     pc+=2;
                 }
                 break;
@@ -240,17 +241,14 @@ void Chip8::emulateCycle(){
                 //Opcode 0x8XY7 Sets VX to VY minus VX. VF is set to 
                 //0 when there's a borrow, and 1 when there isn't
                 case 0x0007: { 
-                    int difference_1 = (V[(opcode & 0x0F00) >> 4]) - (V[opcode & 0x00F0] >> 8);
-                    if(difference_1 >= 0){ 
-                        V[(opcode & 0x00F0) >> 8] = difference_1;
+                    if(V[(opcode & 0x0F00) >> 8] > V[(opcode & 0x00F0) >> 4])   // VY-VX
+                        V[0xF] = 0; // there is a borrow
+                    else
                         V[0xF] = 1;
-                    }else{
-                        V[(opcode & 0x00F0) >> 8] = V[(opcode & 0x00F0) >> 8] + 0xF - V[(opcode & 0x0F00) >> 4];
-                        V[0xF] = 0;
-                    }
+                    V[(opcode & 0x0F00) >> 8] = V[(opcode & 0x00F0) >> 4] - V[(opcode & 0x0F00) >> 8];                 
                     pc+=2;
-                break;
                 }
+                break;
 
                 //Opcode 0x8XYE Shifts VX left by one. VF is set to the 
                 //value of the most significant bit of VX before the shift
@@ -302,7 +300,8 @@ void Chip8::emulateCycle(){
             unsigned short y = V[(opcode & 0x00F0) >> 4];
             unsigned short height = opcode & 0x000F;
             unsigned short pixel;
-            cout << "X: " << x << " Y: " << y << " Height: " << height << endl;
+            cerr << "Location of I: " << I << endl;
+            cerr << "X: " << x << " Y: " << y << " Height: " << height << endl;
 
             V[0xF] = 0;
             for (int yline = 0; yline < height; yline++){
@@ -317,7 +316,6 @@ void Chip8::emulateCycle(){
                 }
             }
 
-
             drawFlag = true;
             pc+=2;
         }
@@ -328,16 +326,20 @@ void Chip8::emulateCycle(){
                 //Opcode 0xEX9E Skips the next instruction if 
                 //the key stored in VX is pressed
                 case 0x000E:
-                    if(keys[V[(opcode & 0x0F00) >> 8]]) 
+                    if(keys[V[(opcode & 0x0F00) >> 8]]){
                         pc+=2; 
+                        cout << "Key was pressed" << endl;
+                    }
                     pc+=2;
                 break;
 
                 //Opcode 0xEXA1 Skips the next instruction if
                 //the key stored in VX isn't pressed
                 case 0x0001:
-                    if(!keys[V[(opcode & 0x0F00) >> 8]])
+                    if(!keys[V[(opcode & 0x0F00) >> 8]]){
+                        cout << "Key " << V[(opcode & 0x0F00) >> 8] << "was not presssed" << endl;
                         pc+=2;
+                    }
                     pc+=2;
                 break;
             }
@@ -358,7 +360,7 @@ void Chip8::emulateCycle(){
                     cout << "Waiting for a key press..." << endl;
                     for(unsigned char i = 0; i < 0xF; i++){
                         if(keys[i]){
-                            cout << "Key was pressed" << endl;
+                            cout << "Key was pressed: Chip8 Emu" << endl;
                             V[(opcode & 0x0F00) >> 8] = i;
                             key_pressed=true;
                         }
@@ -427,11 +429,8 @@ void Chip8::emulateCycle(){
                 //Opcode 0xFX65 Fills V0 to VX (including VX) with 
                 //values from memory starting at address I
                 case 0x0065:
-                    for(int i = 0; i < (opcode & 0x0F00 >> 8)+1; i++){
-                        cout << "Index " << (I+i) << endl;
+                    for(int i = 0; i < (opcode & 0x0F00 >> 8)+1; i++)
                         V[i] = memory[I+i];
-                    }
-                    cout << "Finished loop" << endl;
 
                     I += ((opcode & 0x0F00) >> 8) + 1;
                     pc+=2;
@@ -441,7 +440,7 @@ void Chip8::emulateCycle(){
         }
 
         default:
-            cout << "Unknown opcode 0x" << hex << opcode << endl;
+            cerr << "Unknown opcode 0x" << hex << opcode << endl;
     }
 
     updateTimers();
@@ -505,8 +504,4 @@ vector<sf::Uint8> Chip8::getGFX(){
         pixels[i+3] = gfx[i];
     }
     return pixels;
-}
-
-bool Chip8::isDraw(){
-    return drawFlag;
 }

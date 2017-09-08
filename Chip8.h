@@ -31,7 +31,6 @@ class Chip8{
         Chip8();
         ~Chip8();
         vector<sf::Uint8> getGFX();
-        bool isDraw();
         bool loadApplication(char const* filename);
         void emulateCycle();
         void init();

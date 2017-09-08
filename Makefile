@@ -15,7 +15,7 @@ all: $(OBJECTS)
 	$(COMPILER) $(OBJECTS) $(SFMLPROJECTFLAGS)
 
 run: all
-	./$(PNAME) roms/PONG2.c8
+	./$(PNAME) roms/BLITZ.c8
 
 debug: all
 	gdb ./$(PNAME)
