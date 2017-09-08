@@ -26,7 +26,6 @@ Chip8-Emu
 *.log
 *.sql
 *.sqlite
-*.c8
 
 # OS generated files #
 ######################
