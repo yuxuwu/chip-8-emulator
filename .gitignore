@@ -23,6 +23,7 @@ Chip8-Emu
 
 # Logs and databases #
 ######################
+log.txt
 *.log
 *.sql
 *.sqlite

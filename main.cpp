@@ -11,6 +11,7 @@
 
 #define WIDTH 64
 #define HEIGHT 32
+#define USLEEP_TIME 2000
 
 Chip8 chip8;
 
@@ -53,7 +54,7 @@ int main(int argc, char ** argv) {
                 case sf::Event::KeyPressed:
                     if(event.key.code == sf::Keyboard::Escape)
                         window.close();
-                    cout << "Key pressed" << endl;
+                    // cout << "Key pressed" << endl;
                     chip8.keys[0x0] = event.key.code == sf::Keyboard::X; 
                     chip8.keys[0x1] = event.key.code == sf::Keyboard::Num1;
                     chip8.keys[0x2] = event.key.code == sf::Keyboard::Num2;
@@ -70,8 +71,9 @@ int main(int argc, char ** argv) {
                     chip8.keys[0xD] = event.key.code == sf::Keyboard::R;
                     chip8.keys[0xE] = event.key.code == sf::Keyboard::F;
                     chip8.keys[0xF] = event.key.code == sf::Keyboard::V;
+                break;
                 case sf::Event::KeyReleased:
-                    cout << "Key released" << endl;
+                    // cout << "Key released" << endl;
                     chip8.keys[0x0] = chip8.keys[0x0] && !(event.key.code == sf::Keyboard::X);
                     chip8.keys[0x1] = chip8.keys[0x0] && !(event.key.code == sf::Keyboard::Num1);
                     chip8.keys[0x2] = chip8.keys[0x0] && !(event.key.code == sf::Keyboard::Num2);
@@ -109,7 +111,8 @@ int main(int argc, char ** argv) {
             window.display();
             chip8.drawFlag = false;
         }
-        
+    //sleep for USLEEP_TIME microseconds
+    usleep(USLEEP_TIME);    
     }
     return 0;
 }

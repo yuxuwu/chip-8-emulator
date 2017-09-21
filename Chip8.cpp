@@ -337,7 +337,7 @@ void Chip8::emulateCycle(){
                 //the key stored in VX isn't pressed
                 case 0x0001:
                     if(!keys[V[(opcode & 0x0F00) >> 8]]){
-                        cout << "Key " << V[(opcode & 0x0F00) >> 8] << "was not presssed" << endl;
+                        // cout << "Key " << V[(opcode & 0x0F00) >> 8] << "was not presssed" << endl;
                         pc+=2;
                     }
                     pc+=2;
@@ -357,7 +357,7 @@ void Chip8::emulateCycle(){
                 //Opcode 0xFX0A A key press is awaited, and then stored in VX
                 case 0x000A: {
                     bool key_pressed = false;
-                    cout << "Waiting for a key press..." << endl;
+                    // cout << "Waiting for a key press..." << endl;
                     for(unsigned char i = 0; i < 0xF; i++){
                         if(keys[i]){
                             cout << "Key was pressed: Chip8 Emu" << endl;
