@@ -1,15 +1,17 @@
-#include <SFML/Window.hpp>
-#include <SFML/Graphics.hpp>
 #include <iostream>
 #include <fstream>
 #include <unistd.h>
 #include <vector>
+#include <SFML/Window.hpp>
+#include <SFML/System/Clock.hpp>
+#include <SFML/Graphics.hpp>
 
 #include "Chip8.h"
 
 #define WIDTH 64
 #define HEIGHT 32
 #define USLEEP_TIME 500
+#define FRAME_TIME 15 //15 frames before each cycle
 
 Chip8 chip8;
 
@@ -34,6 +36,7 @@ int main(int argc, char ** argv) {
     sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Chip8-Emu");
     sf::Sprite sprite;
     sf::Texture texture;
+    sf::Clock timer;
     vector<sf::Uint8> pixels(WIDTH*HEIGHT*4);
     //redirect cerr to log file
     std::ofstream error("log.txt");
@@ -65,23 +68,26 @@ int main(int argc, char ** argv) {
                 break;
             }
         }
+        
+        //Update texture if in frame time
+        if(timer.getElapsedTime().asMilliseconds() % FRAME_TIME > 1){
+            timer.restart();
+            chip8.emulateCycle();
+            if(chip8.drawFlag){
+                pixels = transformToPix(chip8.getGFX(), pixels);
+                texture.update(&pixels[0]);
 
-        //Update texture
-        chip8.emulateCycle();
-        if(chip8.drawFlag){
-            pixels = transformToPix(chip8.getGFX(), pixels);
-            texture.update(&pixels[0]);
+                //Update sprite with texture
+                sprite.setTexture(texture);
 
-            //Update sprite with texture
-            sprite.setTexture(texture);
+                //Clear window
+                window.clear(sf::Color::Black);
 
-            //Clear window
-            window.clear(sf::Color::Black);
-
-            //Draw everything
-            window.draw(sprite);
-            window.display();
-            chip8.drawFlag = false;
+                //Draw everything
+                window.draw(sprite);
+                window.display();
+                chip8.drawFlag = false;
+            }
         }
     }
     /*----- END: Main Loop -----*/
